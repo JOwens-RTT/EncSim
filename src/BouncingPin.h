@@ -1,12 +1,19 @@
 #pragma once
 
 #include "TeensyTimerTool.h"
-#include "wprogram.h"
+
+#if defined(ARDUINO) && ARDUINO >= 100
+#    include <Arduino.h>
+#elif defined(PLATFORMIO_BOARD) && (PLATFORMIO_BOARD == teensy40 || PLATFORMIO_BOARD == teensy41)
+#    include <Arduino.h>
+#else
+#    include <WProgram.h>
+#endif
 
 class BouncingPin
 {
  public:
-    BouncingPin() :bounceTimer(TeensyTimerTool::TCK) {}
+    BouncingPin() : bounceTimer(TeensyTimerTool::TCK) {}
 
     void begin(unsigned pin)
     {
@@ -43,12 +50,12 @@ class BouncingPin
             int curBounceTime = random(minBounceTime, maxBounceTime); // get random time for this peak
             time += curBounceTime;
             bounceTimer.trigger(curBounceTime);
-            //Serial.printf("bouncing %d\n", curBounceTime);
+            // Serial.printf("bouncing %d\n", curBounceTime);
         } else
         {
-            //Serial.printf("no bounce  %d\n", s);
+            // Serial.printf("no bounce  %d\n", s);
             digitalWriteFast(pin, targetState); // we always end with the target level
-            time = 0;                 // prepare for next bouncing
+            time = 0;                           // prepare for next bouncing
         }
     }
 
