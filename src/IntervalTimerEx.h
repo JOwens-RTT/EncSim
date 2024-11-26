@@ -15,11 +15,11 @@ class IntervalTimerEx : public IntervalTimer
  public:
 #if defined(USE_CPP11_CALLBACKS)
     using callback_t = std::function<void()>;
-    using relay_t = void (*)();
 #else
     using callback_t = void (*)(void*);
-    using relay_t = void (*)();
 #endif
+    using relay_t = void (*)();
+
  public:
     template <typename period_t> // begin is implemented as template to avoid replication the various versions of IntervalTimer::begin
 #if defined(USE_CPP11_CALLBACKS)

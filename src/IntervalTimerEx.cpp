@@ -21,7 +21,7 @@ IntervalTimerEx::callback_t IntervalTimerEx::callbacks[4]{
 
 #if defined(USE_CPP11_CALLBACKS)
 
-relay_t IntervalTimerEx::relays[4]{
+IntervalTimerEx::relay_t IntervalTimerEx::relays[4]{
     [] { callbacks[0](); },
     [] { callbacks[1](); },
     [] { callbacks[2](); },
@@ -31,7 +31,7 @@ relay_t IntervalTimerEx::relays[4]{
 #else
 
 // generate the static array of relay functions
-relay_t IntervalTimerEx::relays[4]{
+IntervalTimerEx::relay_t IntervalTimerEx::relays[4]{
     [] { callbacks[0](states[0]); },
     [] { callbacks[1](states[1]); },
     [] { callbacks[2](states[2]); },
