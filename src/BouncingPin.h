@@ -37,6 +37,11 @@ class BouncingPin
     }
     unsigned totalBounceTime, minBounceTime, maxBounceTime;
 
+    bool getState()
+    {
+        return targetState;
+    }
+
  private:
     bool targetState;
 

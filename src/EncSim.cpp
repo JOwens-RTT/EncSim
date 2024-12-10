@@ -1,6 +1,5 @@
 #include "EncSim.h"
 
-
 EncSim::EncSim(unsigned pinA, unsigned pinB, unsigned pinZ)
 {
     this->A = pinA;
@@ -39,7 +38,7 @@ void EncSim::moveAbsAsync(int _target)
     direction = (target >= current) ? 1 : -1;
 
     if (!running)
-        mainTimer.begin([this] {pitISR(); }, T[current & 1]);
+        mainTimer.begin([this] { pitISR(); }, T[current & 1]);
     running = true;
 }
 
@@ -111,7 +110,7 @@ EncSim& EncSim::setCountRate(float f_Hz, float phase_deg)
 
     frequency = 2'000'000 / (T[0] + T[1]);
 
-    //Serial.printf("%5f %5f %5f %5f \n", halfPeriod, T[0], T[1], frequency);
+    // Serial.printf("%5f %5f %5f %5f \n", halfPeriod, T[0], T[1], frequency);
     return *this;
 }
 
